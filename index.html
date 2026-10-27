@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Khedmati | On-Demand Home Maintenance & Technician Network</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+
+    <!-- ==========================================================================
+       Header & Navigation
+       ========================================================================== -->
+    <header>
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="brand" onclick="navigateTo('home')">
+                    <div class="brand-logo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                    </div>
+                    <div class="brand-text">
+                        <div class="brand-title">Khedmati<span>.</span></div>
+                        <div class="brand-tagline">Home Maintenance Platform – Founded & Managed by Ahmed Assall </div>
+                    </div>
+                </div>
+
+                <ul class="nav-links">
+                    <li><a class="nav-link active" data-nav="home" onclick="navigateTo('home')">Home</a></li>
+                    <li><a class="nav-link" data-nav="request" onclick="navigateTo('request')">Request a Service</a>
+                    </li>
+                    <li><a class="nav-link" data-nav="directory" onclick="navigateTo('directory')">Technician
+                            Directory</a></li>
+                    <li><a class="nav-link" data-nav="register" onclick="navigateTo('register')">Register as
+                            Technician</a></li>
+                    <li>
+                        <a class="nav-link" data-nav="my-requests" onclick="navigateTo('my-requests')">
+                            My Requests
+                            <span class="nav-badge" id="nav-request-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="nav-actions">
+                    <button class="btn btn-emergency btn-sm" onclick="quickEmergency()">
+                        <div class="nav-actions">
+                            <!-- Settings Controls: Language & Theme -->
+                            <div class="header-settings">
+                                <!-- Language Toggle Button -->
+                                <button class="settings-btn" id="langToggleBtn" onclick="toggleLanguage()"
+                                    title="Switch Language">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <path
+                                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                        </path>
+                                    </svg>
+                                    <span id="langLabel">عربي</span>
+                                </button>
+
+                                <!-- Theme Toggle Button -->
+                                <button class="settings-btn" id="themeToggleBtn" onclick="toggleTheme()"
+                                    title="Toggle Dark/Light Mode">
+                                    <!-- Sun Icon (shown in dark mode) -->
+                                    <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="5"></circle>
+                                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                    </svg>
+                                    <!-- Moon Icon (shown in light mode) -->
+                                    <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Emergency Service Button -->
+                            <button class="btn btn-emergency btn-sm" onclick="quickEmergency()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                                </svg>
+                                <span data-i18n="emergency_btn">Emergency Service</span>
+                            </button>
+
+                            <!-- Mobile Menu Hamburger -->
+                            <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                        </svg>
+                        Emergency Dispatch
+                    </button>
+                    <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div class="mobile-drawer" id="mobileDrawer">
+            <div class="mobile-drawer" id="mobileDrawer">
+                <div class="mobile-settings-row">
+                    <button class="settings-btn" onclick="toggleLanguage()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg>
+                        <span class="mobLangLabel">عربي</span>
+                    </button>
+
+                    <button class="settings-btn" onclick="toggleTheme()">
+                        <span class="mobThemeText">Toggle Theme</span>
+                    </button>
+                </div>
+
+                <a class="nav-link" onclick="navigateTo('home')">Home</a>
+                <a class="nav-link" onclick="navigateTo('request')">Request a Service</a>
+                <a class="nav-link" onclick="navigateTo('directory')">Technician Directory</a>
+                <a class="nav-link" onclick="navigateTo('register')">Register as Technician</a>
+                <a class="nav-link" onclick="navigateTo('my-requests')">
+                    My Requests (<span id="mobile-req-count">0</span>)
+                </a>
+                <button class="btn btn-emergency" style="width:100%; min-height:48px;" onclick="quickEmergency()">🚨
+                    Request Emergency Service</button>
+            </div>
+            <div class="mobile-settings-row">
+                <button class="settings-btn" onclick="toggleLanguage()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                        </path>
+                    </svg>
+                    <span class="mobLangLabel">عربي</span>
+                </button>
+
+                <button class="settings-btn" onclick="toggleTheme()">
+                    <span class="mobThemeText">Toggle Theme</span>
+                </button>
+            </div>
+            <a class="nav-link" onclick="navigateTo('home')">Home</a>
+            <a class="nav-link" onclick="navigateTo('request')">Request a Service</a>
+            <a class="nav-link" onclick="navigateTo('directory')">Technician Directory</a>
+            <a class="nav-link" onclick="navigateTo('register')">Register as Technician</a>
+            <a class="nav-link" onclick="navigateTo('my-requests')">
+                My Requests (<span id="mobile-req-count">0</span>)
+            </a>
+            <button class="btn btn-emergency" style="width:100%" onclick="quickEmergency()">🚨 Request Emergency
+                Service</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- ========================================================================
+         PAGE 1: Home
+         ======================================================================== -->
+        <section id="page-home" class="page-section active">
+            <!-- Hero Section -->
+            <div class="hero">
+                <div class="container">
+                    <div class="hero-grid">
+                        <div>
+                            <div class="hero-badge">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                </svg>
+                                100% Certified Local Handymen & Specialists
+                            </div>
+                            <h1 class="hero-title">Reliable Home Repairs <span>Made Effortless</span>.</h1>
+                            <p class="hero-desc">
+                                From sudden plumbing leaks and electrical faults to AC overhauls and appliance
+                                repairs—Khedmati connects you instantly with verified local technicians across your
+                                city.
+                            </p>
+                            <div class="hero-cta">
+                                <button class="btn btn-primary" onclick="navigateTo('request')">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                        <line x1="12" y1="18" x2="12" y2="12"></line>
+                                        <line x1="9" y1="15" x2="15" y2="15"></line>
+                                    </svg>
+                                    Book a Maintenance Service
+                                </button>
+                                <button class="btn btn-outline" onclick="navigateTo('directory')">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                    Browse Technician Directory
+                                </button>
+                            </div>
+                            <div class="hero-trust-bar">
+                                <div class="trust-item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Direct WhatsApp & Call
+                                </div>
+                                <div class="trust-item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Zero Middleman Commissions
+                                </div>
+                                <div class="trust-item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Safe Local Storage
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hero Feature Preview Card -->
+                        <div>
+                            <div class="hero-card-preview">
+                                <div class="hero-card-header">
+                                    <div>
+                                        <strong style="display:block; font-size:1.1rem;">Quick Dispatch Status</strong>
+                                        <span style="font-size:0.85rem; color:var(--text-muted)">Real-time regional
+                                            coverage</span>
+                                    </div>
+                                    <span class="badge badge-emergency">Active Now</span>
+                                </div>
+                                <div class="hero-stat-card">
+                                    <div class="hero-stat-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div style="font-size:0.85rem; color:var(--text-muted);">Emergency Arrival</div>
+                                        <div style="font-size:1.3rem; font-weight:800; color:var(--text-main);">Within
+                                            30–45 Mins</div>
+                                    </div>
+                                </div>
+                                <div class="hero-stat-card">
+                                    <div class="hero-stat-icon" style="color:var(--success);">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="9" cy="7" r="4"></circle>
+                                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div style="font-size:0.85rem; color:var(--text-muted);">Verified Technicians
+                                        </div>
+                                        <div style="font-size:1.3rem; font-weight:800; color:var(--text-main);">Rated
+                                            4.8 / 5.0 ★</div>
+                                    </div>
+                                </div>
+                                <div style="text-align:center; margin-top:1.5rem;">
+                                    <button class="btn btn-outline btn-sm" style="width:100%;"
+                                        onclick="navigateTo('register')">
+                                        Are you a repair technician? Register Today
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Categories Grid -->
+            <div class="container">
+                <div class="section-head">
+                    <h2 class="section-title">Maintenance Services We Cover</h2>
+                    <p class="section-subtitle">Select a category to pre-fill your service ticket and match with
+                        specialized local technicians.</p>
+                </div>
+
+                <div class="services-grid">
+                    <!-- Electrical -->
+                    <div class="service-card" onclick="bookCategory('Electrical')">
+                        <div class="service-icon-wrap">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Electrical</h3>
+                        <p class="service-desc">Short circuits, circuit breakers, light fixtures, socket replacements,
+                            and emergency outage restoration.</p>
+                        <div class="service-action-link">
+                            Request Electrical Service &rarr;
+                        </div>
+                    </div>
+
+                    <!-- Plumbing -->
+                    <div class="service-card" onclick="bookCategory('Plumbing')">
+                        <div class="service-icon-wrap">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Plumbing</h3>
+                        <p class="service-desc">Water leak repairs, pipe blockages, drain unclogging, water heater
+                            installation, and sanitary fixtures.</p>
+                        <div class="service-action-link">
+                            Request Plumbing Service &rarr;
+                        </div>
+                    </div>
+
+                    <!-- Carpentry -->
+                    <div class="service-card" onclick="bookCategory('Carpentry')">
+                        <div class="service-icon-wrap">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 2l4 4-9 9-4-4 9-9z"></path>
+                                <path d="M3 21l3-3"></path>
+                                <path d="M18 10l-4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Carpentry</h3>
+                        <p class="service-desc">Door locks, hinge adjustments, kitchen cabinet repairs, custom wood
+                            trimming, and furniture assembly.</p>
+                        <div class="service-action-link">
+                            Request Carpentry Service &rarr;
+                        </div>
+                    </div>
+
+                    <!-- HVAC -->
+                    <div class="service-card" onclick="bookCategory('HVAC & Air Conditioning')">
+                        <div class="service-icon-wrap">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14" />
+                            </svg>
+                        </div>
+                        <h3 class="service-title">HVAC & Air Conditioning</h3>
+                        <p class="service-desc">Split and central AC diagnostics, freon gas refilling, filter
+                            deep-cleaning, and thermostat setup.</p>
+                        <div class="service-action-link">
+                            Request HVAC Service &rarr;
+                        </div>
+                    </div>
+
+                    <!-- Home Appliances -->
+                    <div class="service-card" onclick="bookCategory('Home Appliances')">
+                        <div class="service-icon-wrap">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                                <circle cx="12" cy="14" r="4"></circle>
+                                <line x1="8" y1="6" x2="8.01" y2="6"></line>
+                                <line x1="12" y1="6" x2="12.01" y2="6"></line>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Home Appliances</h3>
+                        <p class="service-desc">Washing machines, refrigerators, electric ovens, dishwashers, dryers,
+                            and microwave repairs.</p>
+                        <div class="service-action-link">
+                            Request Appliance Service &rarr;
+                        </div>
+                    </div>
+
+                    <!-- Other / General -->
+                    <div class="service-card" onclick="bookCategory('Other')">
+                        <div class="service-icon-wrap">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">General Maintenance</h3>
+                        <p class="service-desc">Wall mounting, painting touch-ups, gypsum ceiling fixes, curtain rods,
+                            and multipurpose handyman tasks.</p>
+                        <div class="service-action-link">
+                            Request General Help &rarr;
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How It Works Section -->
+                <div class="how-it-works">
+                    <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                        <h2 class="section-title">How Khedmati Works</h2>
+                        <p class="section-subtitle">A simple, transparent process designed to get your problem fixed
+                            quickly.</p>
+                    </div>
+
+                    <div class="steps-grid">
+                        <div class="step-item">
+                            <div class="step-num">1</div>
+                            <h4 class="step-title">Specify Your Problem</h4>
+                            <p class="step-desc">Pick your service category, set urgency level (emergency, today, or
+                                later), and attach an optional photo.</p>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-num">2</div>
+                            <h4 class="step-title">Saved to Your Device</h4>
+                            <p class="step-desc">Your request generates an official ticket code stored securely inside
+                                your browser's LocalStorage.</p>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-num">3</div>
+                            <h4 class="step-title">Direct WhatsApp or Call</h4>
+                            <p class="step-desc">Pick a verified technician from the directory or share your ticket
+                                directly via WhatsApp with one click.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Privacy Callout -->
+                <div class="privacy-callout">
+                    <div class="privacy-content">
+                        <h3>Local-First & Client-Side Privacy</h3>
+                        <p>Khedmati keeps your service requests and technician profiles stored securely on your browser
+                            through LocalStorage. No server accounts, no tracking, and complete privacy control.</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="navigateTo('my-requests')">Check My Requests</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================
+         PAGE 2: Customer Service Request Form
+         ======================================================================== -->
+        <section id="page-request" class="page-section">
+            <div class="container">
+                <div class="form-container">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <span class="badge badge-today" style="margin-bottom: 0.5rem;">Fast Service Dispatch</span>
+                        <h2 style="font-size: 2rem; font-weight: 800; color: var(--text-main);">Request Home Maintenance
+                        </h2>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Fill in the details below to log your
+                            request and contact available technicians.</p>
+                    </div>
+
+                    <form id="customerRequestForm" novalidate>
+                        <div class="form-grid">
+                            <!-- Service Type -->
+                            <div class="form-group">
+                                <label for="reqServiceType">Service Type <span class="req-mark">*</span></label>
+                                <select id="reqServiceType" required>
+                                    <option value="">Select a service category</option>
+                                    <option value="Electrical">Electrical</option>
+                                    <option value="Plumbing">Plumbing</option>
+                                    <option value="Carpentry">Carpentry</option>
+                                    <option value="HVAC & Air Conditioning">HVAC & Air Conditioning</option>
+                                    <option value="Home Appliances">Home Appliances</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div class="error-msg" id="errServiceType">Please select a service type.</div>
+                            </div>
+
+                            <!-- Issue Type -->
+                            <div class="form-group">
+                                <label for="reqIssueType">Issue Type <span class="req-mark">*</span></label>
+                                <select id="reqIssueType" required>
+                                    <option value="">Select issue nature</option>
+                                    <option value="Sudden breakdown">Sudden breakdown</option>
+                                    <option value="New installation">New installation</option>
+                                    <option value="Routine maintenance">Routine maintenance</option>
+                                    <option value="Leakage">Leakage</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div class="error-msg" id="errIssueType">Please select the type of issue.</div>
+                            </div>
+
+                            <!-- Urgency -->
+                            <div class="form-group full-width">
+                                <label>Urgency Level <span class="req-mark">*</span></label>
+                                <div class="radio-pill-group">
+                                    <label class="radio-card urgency-emergency">
+                                        <input type="radio" name="urgency" value="Emergency" checked>
+                                        <div class="radio-card-content">
+                                            <span class="radio-card-title">🚨 Emergency</span>
+                                            <span class="radio-card-sub">Immediate dispatch</span>
+                                        </div>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="urgency" value="Within today">
+                                        <div class="radio-card-content">
+                                            <span class="radio-card-title">⚡ Within Today</span>
+                                            <span class="radio-card-sub">During working hours</span>
+                                        </div>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="urgency" value="Schedule for a later date">
+                                        <div class="radio-card-content">
+                                            <span class="radio-card-title">📅 Schedule Later</span>
+                                            <span class="radio-card-sub">Choose specific date & time</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Schedule Date Picker (Visible when "Schedule for a later date" selected) -->
+                            <div class="form-group full-width" id="scheduledDateWrap" style="display: none;">
+                                <label for="reqScheduledDate">Preferred Date & Time <span
+                                        class="req-mark">*</span></label>
+                                <input type="datetime-local" id="reqScheduledDate">
+                                <div class="error-msg" id="errScheduledDate">Please specify your preferred date and
+                                    time.</div>
+                            </div>
+
+                            <!-- City -->
+                            <div class="form-group">
+                                <label for="reqCity">City <span class="req-mark">*</span></label>
+                                <input type="text" id="reqCity" placeholder="e.g. Cairo, Riyadh, Dubai, Amman" required>
+                                <div class="error-msg" id="errCity">Please enter your city.</div>
+                            </div>
+
+                            <!-- Area / Neighborhood -->
+                            <div class="form-group">
+                                <label for="reqArea">Area / District <span class="req-mark">*</span></label>
+                                <input type="text" id="reqArea" placeholder="e.g. Al-Maadi, Downtown, Al-Olaya"
+                                    required>
+                                <div class="error-msg" id="errArea">Please enter your neighborhood or area.</div>
+                            </div>
+
+                            <!-- Full Address -->
+                            <div class="form-group full-width">
+                                <label for="reqAddress">Full Address <span class="req-mark">*</span></label>
+                                <input type="text" id="reqAddress"
+                                    placeholder="Building number, street name, apartment or nearest landmark" required>
+                                <div class="error-msg" id="errAddress">Please enter your street address and building
+                                    information.</div>
+                            </div>
+
+                            <!-- Additional Problem Details -->
+                            <div class="form-group full-width">
+                                <label for="reqDetails">Additional Details About Problem <span
+                                        class="req-mark">*</span></label>
+                                <textarea id="reqDetails" rows="3"
+                                    placeholder="Describe the symptoms, strange noises, appliance brand, or specific problem locations..."
+                                    required></textarea>
+                                <div class="error-msg" id="errDetails">Please provide brief details about the issue.
+                                </div>
+                            </div>
+
+                            <!-- Optional Photo Upload with Live Preview -->
+                            <div class="form-group full-width">
+                                <label>Attach Photo of the Issue <span
+                                        style="color:var(--text-muted); font-weight:normal;">(Optional)</span></label>
+                                <div class="file-dropzone" onclick="document.getElementById('reqPhoto').click()">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" style="color:var(--primary); margin-bottom:0.5rem;">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <p style="font-weight:600; font-size:0.9rem;">Click to upload a clear photo of the
+                                        breakdown</p>
+                                    <p class="field-hint">PNG, JPG, or WEBP up to 5MB (stored locally)</p>
+                                    <input type="file" id="reqPhoto" accept="image/*" style="display: none;">
+                                </div>
+
+                                <div class="file-preview-wrap" id="photoPreviewWrap">
+                                    <img src="" id="photoPreviewImg" class="file-preview-img"
+                                        alt="Uploaded Issue Preview">
+                                    <button type="button" class="file-remove-btn" onclick="clearUploadedPhoto()"
+                                        title="Remove photo">&times;</button>
+                                </div>
+                            </div>
+
+                            <!-- Customer Name -->
+                            <div class="form-group">
+                                <label for="reqCustName">Customer Name <span class="req-mark">*</span></label>
+                                <input type="text" id="reqCustName" placeholder="e.g. Sarah Jenkins" required>
+                                <div class="error-msg" id="errCustName">Please enter your name.</div>
+                            </div>
+
+                            <!-- Customer Phone or WhatsApp Number -->
+                            <div class="form-group">
+                                <label for="reqCustPhone">Phone or WhatsApp Number <span
+                                        class="req-mark">*</span></label>
+                                <input type="tel" id="reqCustPhone" placeholder="e.g. +20 100 123 4567 or 0501234567"
+                                    required>
+                                <div class="error-msg" id="errCustPhone">Please enter a valid phone or WhatsApp number.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div
+                            style="margin-top: 2rem; display: flex; gap: 1rem; align-items: center; justify-content: flex-end;">
+                            <button type="reset" class="btn btn-outline" onclick="clearUploadedPhoto()">Clear
+                                Form</button>
+                            <button type="submit" class="btn btn-primary" id="btnSubmitRequest">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                                Confirm & Save Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================
+         PAGE 3: Technician Registration Form
+         ======================================================================== -->
+        <section id="page-register" class="page-section">
+            <div class="container">
+                <div class="form-container">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <span class="badge badge-today" style="margin-bottom: 0.5rem;">Join Verified
+                            Professionals</span>
+                        <h2 style="font-size: 2rem; font-weight: 800; color: var(--text-main);">Register as a Technician
+                        </h2>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">
+                            Offer your maintenance skills to clients in your district. Once registered, your profile
+                            appears immediately in the directory.
+                        </p>
+                    </div>
+
+                    <form id="techRegistrationForm" novalidate>
+                        <div class="form-grid">
+                            <!-- Full Name -->
+                            <div class="form-group">
+                                <label for="techName">Full Name <span class="req-mark">*</span></label>
+                                <input type="text" id="techName" placeholder="e.g. Tarek Mansour" required>
+                                <div class="error-msg" id="errTechName">Please enter your full name.</div>
+                            </div>
+
+                            <!-- Main Specialization -->
+                            <div class="form-group">
+                                <label for="techSpecialty">Main Specialization <span class="req-mark">*</span></label>
+                                <select id="techSpecialty" required>
+                                    <option value="">Select your main specialty</option>
+                                    <option value="Electrical">Electrical</option>
+                                    <option value="Plumbing">Plumbing</option>
+                                    <option value="Carpentry">Carpentry</option>
+                                    <option value="HVAC & Air Conditioning">HVAC & Air Conditioning</option>
+                                    <option value="Home Appliances">Home Appliances</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div class="error-msg" id="errTechSpecialty">Please choose your specialization.</div>
+                            </div>
+
+                            <!-- Phone Number -->
+                            <div class="form-group">
+                                <label for="techPhone">Phone Number for Calls <span class="req-mark">*</span></label>
+                                <input type="tel" id="techPhone" placeholder="e.g. +20 102 345 6789" required>
+                                <div class="error-msg" id="errTechPhone">Please enter your primary phone number.</div>
+                            </div>
+
+                            <!-- WhatsApp Number -->
+                            <div class="form-group">
+                                <label for="techWhatsApp">WhatsApp Number for Work <span
+                                        class="req-mark">*</span></label>
+                                <input type="tel" id="techWhatsApp" placeholder="e.g. +20 102 345 6789" required>
+                                <div class="error-msg" id="errTechWhatsApp">Please enter your WhatsApp contact number.
+                                </div>
+                            </div>
+
+                            <!-- Years of Experience -->
+                            <div class="form-group">
+                                <label for="techExperience">Years of Experience <span class="req-mark">*</span></label>
+                                <input type="number" id="techExperience" min="1" max="50" placeholder="e.g. 7" required>
+                                <div class="error-msg" id="errTechExperience">Please enter your years of experience.
+                                </div>
+                            </div>
+
+                            <!-- Working Days & Hours -->
+                            <div class="form-group">
+                                <label for="techHours">Working Days & Hours <span class="req-mark">*</span></label>
+                                <input type="text" id="techHours" placeholder="e.g. Mon - Sat: 8:00 AM - 7:00 PM"
+                                    required>
+                                <div class="error-msg" id="errTechHours">Please specify your working schedule.</div>
+                            </div>
+
+                            <!-- Cities and Neighborhoods Served -->
+                            <div class="form-group full-width">
+                                <label for="techAreas">Cities & Neighborhoods Served <span
+                                        class="req-mark">*</span></label>
+                                <input type="text" id="techAreas"
+                                    placeholder="e.g. Cairo (Al-Maadi, Nasr City, New Cairo), Giza (Dokki)" required>
+                                <div class="error-msg" id="errTechAreas">Please specify the cities and areas you can
+                                    serve.</div>
+                                <span class="field-hint">Customers will locate your card by typing any of these area
+                                    names.</span>
+                            </div>
+                        </div>
+
+                        <!-- Submit CTA -->
+                        <div
+                            style="margin-top: 2rem; display: flex; gap: 1rem; align-items: center; justify-content: flex-end;">
+                            <button type="reset" class="btn btn-outline">Reset</button>
+                            <button type="submit" class="btn btn-primary">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                                </svg>
+                                Publish Profile to Directory
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================
+         PAGE 4: Technician Directory
+         ======================================================================== -->
+        <section id="page-directory" class="page-section">
+            <div class="container">
+                <div class="section-head" style="margin-bottom: 2rem;">
+                    <h2 class="section-title">Verified Technician Directory</h2>
+                    <p class="section-subtitle">Search licensed technicians by specialty or location and reach out
+                        directly through WhatsApp or phone call.</p>
+                </div>
+
+                <!-- Directory Controls: Search & Category Filter Pills -->
+                <div class="directory-controls">
+                    <div class="search-box">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="directorySearchInput"
+                            placeholder="Search by city, area, or technician name..." oninput="filterTechnicians()">
+                    </div>
+
+                    <div class="filter-pills">
+                        <button class="filter-pill active" data-filter="All" onclick="setSpecialtyFilter('All')">All
+                            Specializations</button>
+                        <button class="filter-pill" data-filter="Electrical"
+                            onclick="setSpecialtyFilter('Electrical')">Electrical</button>
+                        <button class="filter-pill" data-filter="Plumbing"
+                            onclick="setSpecialtyFilter('Plumbing')">Plumbing</button>
+                        <button class="filter-pill" data-filter="Carpentry"
+                            onclick="setSpecialtyFilter('Carpentry')">Carpentry</button>
+                        <button class="filter-pill" data-filter="HVAC & Air Conditioning"
+                            onclick="setSpecialtyFilter('HVAC & Air Conditioning')">HVAC</button>
+                        <button class="filter-pill" data-filter="Home Appliances"
+                            onclick="setSpecialtyFilter('Home Appliances')">Appliances</button>
+                    </div>
+                </div>
+
+                <!-- Technicians Grid -->
+                <div class="technicians-grid" id="techniciansGrid">
+                    <!-- Dynamically populated from script.js -->
+                </div>
+
+                <!-- Empty Directory Message -->
+                <div id="noTechsFound" class="empty-state" style="display: none; margin-top: 2rem;">
+                    <div class="empty-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </div>
+                    <h3>No Technicians Found</h3>
+                    <p style="color:var(--text-muted); margin-top: 0.5rem;">Try adjusting your city/area search or
+                        choosing another specialty filter.</p>
+                    <button class="btn btn-outline btn-sm" style="margin-top:1rem;"
+                        onclick="resetDirectoryFilters()">Reset Filters</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================
+         PAGE 5: My Requests Dashboard
+         ======================================================================== -->
+        <section id="page-my-requests" class="page-section">
+            <div class="container">
+                <div class="dashboard-header">
+                    <div>
+                        <h2 class="section-title" style="text-align: left; margin-bottom: 0.25rem;">My Service Requests
+                        </h2>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">
+                            Track submitted maintenance requests, update their status, or share their details with
+                            technicians.
+                        </p>
+                    </div>
+                    <button class="btn btn-primary" onclick="navigateTo('request')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Create New Request
+                    </button>
+                </div>
+
+                <!-- Metric Counter Cards -->
+                <div class="dashboard-stats">
+                    <div class="dash-stat-box">
+                        <div class="dash-stat-label">Total Requests</div>
+                        <div class="dash-stat-value" id="statTotalRequests">0</div>
+                    </div>
+                    <div class="dash-stat-box">
+                        <div class="dash-stat-label">Pending Review</div>
+                        <div class="dash-stat-value" id="statPendingRequests" style="color: #d97706;">0</div>
+                    </div>
+                    <div class="dash-stat-box">
+                        <div class="dash-stat-label">In Progress</div>
+                        <div class="dash-stat-value" id="statProgressRequests" style="color: var(--info);">0</div>
+                    </div>
+                    <div class="dash-stat-box">
+                        <div class="dash-stat-label">Emergencies</div>
+                        <div class="dash-stat-value" id="statEmergencyRequests" style="color: var(--danger);">0</div>
+                    </div>
+                </div>
+
+                <!-- Requests List -->
+                <div class="requests-list" id="requestsList">
+                    <!-- Dynamically populated from script.js -->
+                </div>
+
+                <!-- Empty Requests State -->
+                <div id="noRequestsState" class="empty-state" style="display: none;">
+                    <div class="empty-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                    </div>
+                    <h3>No Requests Logged Yet</h3>
+                    <p
+                        style="color:var(--text-muted); margin-top: 0.5rem; max-width: 450px; margin-left:auto; margin-right:auto;">
+                        When you submit a service request, it will be safely kept here on your browser's LocalStorage.
+                    </p>
+                    <button class="btn btn-primary" style="margin-top:1.5rem;" onclick="navigateTo('request')">
+                        Submit Your First Request
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================================================
+       Confirmation Modal
+       ========================================================================== -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal-card">
+            <div class="modal-success-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <h3 class="modal-title">Request Successfully Logged!</h3>
+            <p class="modal-desc">Your home maintenance request has been generated and saved locally in your browser.
+            </p>
+
+            <div class="modal-meta-box">
+                <div style="margin-bottom: 0.4rem;"><strong>Ticket ID:</strong> <span id="modalReqId"
+                        style="font-family: monospace; font-weight:700; color:var(--primary);"></span></div>
+                <div style="margin-bottom: 0.4rem;"><strong>Service:</strong> <span id="modalReqService"></span></div>
+                <div style="margin-bottom: 0.4rem;"><strong>Urgency:</strong> <span id="modalReqUrgency"></span></div>
+                <div><strong>Location:</strong> <span id="modalReqLocation"></span></div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:0.75rem;">
+                <button class="btn btn-whatsapp" id="btnModalShareWA">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12.031 2C6.505 2 2 6.504 2 12.029c0 1.83.498 3.548 1.365 5.029L2 22l5.097-1.336a10.02 10.02 0 0 0 4.934 1.286h.005c5.524 0 10.029-4.505 10.029-10.03C22.065 6.504 17.556 2 12.031 2zm0 18.272a8.27 8.27 0 0 1-4.223-1.156l-.303-.18-3.136.822.837-3.058-.198-.315A8.257 8.257 0 0 1 3.766 12.03c0-4.557 3.708-8.265 8.269-8.265 4.558 0 8.266 3.708 8.266 8.267 0 4.558-3.708 8.27-8.271 8.27z" />
+                    </svg>
+                    Share Details on WhatsApp
+                </button>
+                <button class="btn btn-outline" onclick="closeConfirmModal(true)">
+                    View in My Requests
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <div class="brand-logo" style="width:28px; height:28px; font-size:0.8rem;">K</div>
+                    <strong>Khedmati</strong> — Professional On-Demand Home Maintenance by Ahmed.Assall
+                </div>
+                <div>
+                    <span>Local Storage Only &bull; All data stays secure on your device &bull; 2026</span>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating WhatsApp Support Button -->
+        <a href="https://wa.me/201208456362" class="whatsapp-float-btn" target="_blank" rel="noopener noreferrer"
+            aria-label="Contact us on WhatsApp">
+            <!-- WhatsApp SVG Icon -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M12.031 2C6.505 2 2 6.504 2 12.029c0 1.83.498 3.548 1.365 5.029L2 22l5.097-1.336a10.02 10.02 0 0 0 4.934 1.286h.005c5.524 0 10.029-4.505 10.029-10.03C22.065 6.504 17.556 2 12.031 2zm0 18.272a8.27 8.27 0 0 1-4.223-1.156l-.303-.18-3.136.822.837-3.058-.198-.315A8.257 8.257 0 0 1 3.766 12.03c0-4.557 3.708-8.265 8.269-8.265 4.558 0 8.266 3.708 8.266 8.267 0 4.558-3.708 8.27-8.271 8.27z" />
+            </svg>
+            <span>Contact us on WhatsApp</span>
+        </a>
+        <!-- Floating WhatsApp Support with Profile Photo -->
+        <a href="https://wa.me/201208456362" class="whatsapp-float-btn" target="_blank" rel="noopener noreferrer"
+            aria-label="Contact us on WhatsApp">
+            <!-- Circular Profile Photo with Fallback -->
+            <div class="wa-avatar-container">
+                <img src="WhatsApp Image 2026-10-25 at 10.29.28 AM.jpeg" alt="Customer Support" class="wa-profile-photo"
+                    onerror="this.style.display='none'; document.getElementById('waPhotoFallback').style.display='flex';">
+                <!-- Placeholder shown automatically if profile.jpg is missing -->
+                <div id="waPhotoFallback" class="wa-profile-placeholder" style="display: none;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+                </div>
+                <!-- Online status badge dot -->
+                <span class="wa-online-dot"></span>
+            </div>
+
+            <div class="wa-label-group">
+                <span class="wa-label-text">Contact us on WhatsApp</span>
+                <svg class="wa-mini-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12.031 2C6.505 2 2 6.504 2 12.029c0 1.83.498 3.548 1.365 5.029L2 22l5.097-1.336a10.02 10.02 0 0 0 4.934 1.286h.005c5.524 0 10.029-4.505 10.029-10.03C22.065 6.504 17.556 2 12.031 2zm0 18.272a8.27 8.27 0 0 1-4.223-1.156l-.303-.18-3.136.822.837-3.058-.198-.315A8.257 8.257 0 0 1 3.766 12.03c0-4.557 3.708-8.265 8.269-8.265 4.558 0 8.266 3.708 8.266 8.267 0 4.558-3.708 8.27-8.271 8.27z" />
+                </svg>
+            </div>
+        </a>
+
+    </footer>
+
+    <!-- External JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
